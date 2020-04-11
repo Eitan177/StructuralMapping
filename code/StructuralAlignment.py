@@ -33,14 +33,18 @@ def get_best_match(query,structures,region=None):
 #Given anchors, employ FREAD to get the best CDR-templates.
 def get_best_cdr_match(query,fread_template):
 	#pickle.dump(query,open('sample_sequence.pckl','w'))
-	cdrs = extract_cdrs(query[0])
-	pdb_template = fread_template[0:4]
-	pdb_chain = fread_template[4]
-
-	cdr_results = {}
-	for cdr in cdrs:
-		cdr_results[cdr] = perform_loop_alignment(cdr,pdb_template,pdb_chain,cdrs[cdr])
-	return cdr_results
+  print(query[0])
+  if(query[0]!=None):  
+    cdrs = extract_cdrs(query[0])
+    pdb_template = fread_template[0:4]
+    pdb_chain = fread_template[4]
+	
+    cdr_results = {}
+    for cdr in cdrs:
+		  cdr_results[cdr] = perform_loop_alignment(cdr,pdb_template,pdb_chain,cdrs[cdr])
+  else:
+    cdr_results=None      
+  return cdr_results
 	
 #given a numbered anarci sequence and reference structures, get the best structural hits.
 def align_single_sequence(query, structures):
@@ -90,4 +94,5 @@ if __name__ == '__main__':
 
 		
 
+	
 	
